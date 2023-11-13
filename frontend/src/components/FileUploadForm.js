@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Papa from 'papaparse'
 
 import { FileUpload } from '../features/contacts/ContactServices';
 import{ useMutation, useQueryClient} from '@tanstack/react-query'
+import { useNavigate } from "react-router-dom"
+
 
 const FileUploadForm = () => {
+  const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!sessionStorage.getItem('user')){
+          navigate('/login')
+        //   setResponseData(null)
+        }
+      },[]);
+    
   const queryClient = useQueryClient()
   const [file, setFile] = useState(null);
   const [CSVData, setCSVData] = useState(null);

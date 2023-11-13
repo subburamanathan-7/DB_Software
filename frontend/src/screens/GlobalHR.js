@@ -1,5 +1,7 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState,useEffect } from 'react'
 import{useQuery, useQueryClient} from '@tanstack/react-query'
+import { useNavigate } from "react-router-dom"
+
 
 import DashNavbar from '../components/DashNavbar'
 import Card from '../components/Card'
@@ -11,6 +13,14 @@ import { getUsers } from '../features/users/UserServices'
 
 
 function GlobalHR() {
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!sessionStorage.getItem('user')){
+          navigate('/login')
+        //   setResponseData(null)
+        }
+      },[]);
    
     let content=""
     let filteredData
