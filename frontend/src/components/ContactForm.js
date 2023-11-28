@@ -1,5 +1,6 @@
 import React, {useState } from 'react'
-import{useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
+import{useMutation, useQueryClient} from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 
 import {addContact} from '../features/contacts/ContactServices'
 
@@ -20,9 +21,7 @@ function ContactForm(currentUserID,onClose) {
         // department:'',
         comments:''
     })
-    const initialState ={}
-    
-    
+    // const initialState ={}
     // Add ContactMutation
     const addContactMutation = useMutation({
         mutationFn: ()=>{
@@ -30,8 +29,30 @@ function ContactForm(currentUserID,onClose) {
         },
         onSuccess:(data)=>{
         //   Object.keys(responseData).forEach(v => responseData[v] = 0)
-          queryClient.invalidateQueries(['contacts'])
+            queryClient.invalidateQueries(['contacts'])
+          toast.success(`Contact Added Successfully`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     
+        },
+        onError:(message)=>{
+            toast.error(`Try Again`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
     })
     
@@ -41,12 +62,38 @@ function ContactForm(currentUserID,onClose) {
       };
      
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         console.log(formData)
-        addContactMutation.mutate()
-        
+        console.log(formData.contactNumber.length)
+        if(!formData.contactNumber || !formData.status){
+            toast.warn('Enter the necessary details', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }
+        else if(formData.contactNumber.length!=10){
+            toast.warn('Enter a valid contact number', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
+        }
+        else{
+            addContactMutation.mutate()
+        }
     }
-      
   return (
    <>
         <div className=''>
@@ -55,23 +102,23 @@ function ContactForm(currentUserID,onClose) {
                     <h3 className='text-xl mb-4 text-center text-[#00000]'>Add Contact</h3>
                     <form>
                         <div className='grid grid-cols-2 gap-2'>
-                            <input className='placeholder-color1 rounded-md border py-1 px-2 border-[#A9A9A9] rounded' placeholder='Name'
-                            type='text' name='name' value={formData.name} onChange={handleChange}/>
-                            <input className='placeholder-color1 rounded-md border py-1 px-2 border-[#A9A9A9] rounded' placeholder='Contact Number'
-                            type='text' name='contactNumber' value={formData.number} onChange={handleChange}/>
+                            <input className='placeholder-[#000000] rounded-md border py-1 px-2 border-[#A9A9A9] rounded' placeholder='Name'
+                            type='text' name='name' value={formData.name} onChange={handleChange} />
+                            <input className='placeholder-[#000000] rounded-md border py-1 px-2 border-[#A9A9A9] rounded' placeholder='Contact Number'
+                            type='text' name='contactNumber' value={formData.number} onChange={handleChange} />
                         </div>
                         <div className='mt-2'>
-                            <input className='placeholder-color1 rounded-md border py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Company Name'
+                            <input className='placeholder-[#000000] rounded-md border py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Company Name'
                             type='text' name='company' value={formData.company} onChange={handleChange}/>
                         </div>
                         <div className='mt-2'>
-                            <input className='placeholder-color1 rounded-md border py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Email'
+                            <input className='placeholder-[#000000] rounded-md border py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Email'
                             type='email' name='email' value={formData.email} onChange={handleChange}/>
                         </div>
                         <div className='grid grid-cols-2 gap-2 mt-2'>
                             <select name="status" id="status" className=' border py-1 px-2 border-[#A9A9A9] rounded'
                             value={formData.status} onChange={handleChange}
-                            required>
+                            >
                                 <option className='text-color1' value='' disabled selected hidden>Choose Contact Status...</option>
                                 <option value="notCalled">Not Called</option>
                                 <option value="calledAccepted">Called/Accepted</option>
@@ -83,7 +130,7 @@ function ContactForm(currentUserID,onClose) {
                             </select>
                             <select name="interviewMode" id="interviewMode" className='border py-1 px-2 border-[#A9A9A9] rounded'
                             value={formData.interviewMode} onChange={handleChange}
-                            required>
+                            >
                                 <option className='text-color1' value='' disabled selected hidden>Choose Interview Mode...</option>
                                 <option value="online">Online</option>
                                 <option value="offline">Offline</option>
@@ -92,16 +139,14 @@ function ContactForm(currentUserID,onClose) {
                         </div>
                         <div className='flex mt-2'>
                             <input  id="HRCount" name="HRCount" type="number" placeholder='HR Count'
-                            className=' placeholder-color1 border py-1 px-2 border-[#A9A9A9] rounded mr-2 w-1/4'
+                            className=' placeholder-[#000000] border py-1 px-2 border-[#A9A9A9] rounded mr-2 w-1/4'
                             value={formData.HRCount} 
                             onChange={handleChange}
-                            min={0}
-                            required/>
+                            min={0}/>
                             <select name="transport" id="transport" 
                             className='border py-1 px-2 border-[#A9A9A9] rounded mr-2'
                             value={formData.transport} 
-                            onChange={handleChange}
-                            required>
+                            onChange={handleChange}>
                             <option className='text-color1' value='' disabled selected hidden>Transportation Mode...</option>
                             <option value="own">Own</option>
                             <option value="Cab">Cab</option>
@@ -109,19 +154,18 @@ function ContactForm(currentUserID,onClose) {
                             <select name="internship" id="internship" 
                             className='border py-1 px-2 border-[#A9A9A9] rounded w-2/5'
                             value={formData.internship} 
-                            onChange={handleChange}
-                            required>
+                            onChange={handleChange}>
                                 <option className='text-color1' value='' disabled selected hidden>Internship ...</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
                         <div className='mt-2'>
-                            <input className='placeholder-color1 rounded-md border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Address'
+                            <input className='placeholder-[#000000] rounded-md border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Address'
                             value={formData.address} onChange={handleChange} name='address' type='textbox'/>
                         </div>
                         <div className='mt-2'>
-                            <input className='placeholder-color1 rounded-md border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Comments'
+                            <input className='placeholder-[#000000] rounded-md border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Comments'
                             value={formData.comments} onChange={handleChange} name='comments' type='textbox'/>
                         </div>
                     </form>

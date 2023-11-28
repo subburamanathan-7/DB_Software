@@ -1,5 +1,8 @@
 import React, { createContext, useState } from 'react'
 import{BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import DBHome from './screens/DBHome'
 import MainDashboard from './screens/MainDashboard'
@@ -8,7 +11,6 @@ import LoginForm from './components/LoginForm'
 import AdminLoginForm from './components/AdminLoginForm'
 import GlobalHR from './screens/GlobalHR'
 import DirectorsDashboard from './screens/DirectorsDashboard'
-import { Spinner } from './components/Spinner'
 import FileUploadForm from './components/FileUploadForm'
 import FAQ from './screens/FAQ'
 import HRPitch from './screens/HRPitch'
@@ -32,14 +34,9 @@ export function App() {
             <Route path="/upload" element={<FileUploadForm/>}/>  
             <Route path="/faq" element={<FAQ/>}/>  
             <Route path="/hr-pitch" element={<HRPitch/>}/>  
-
-
-
-
-            
         </Routes>
-
         </Router>
+        <ToastContainer/>
     </currentUserContext.Provider>
     </>
   )

@@ -52,40 +52,6 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                     </div>
                     <div class="mx-[2%] max-w-full mt-[2%]">
                         <div class="divide-y divide-gray-100">
-                        <details class="group" open>
-                            <summary
-                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
-                                <span className='font-semibold'>If wrong company </span>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                    </svg>
-                                </div>
-                            </summary>
-                            <div class="pb-4 text-secondary-500">Sorry, can you please tell me in which company your currently working at ?(<b>Note it down</b>).</div>
-                        </details>
-                        <details class="group">
-                            <summary
-                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
-                                If wrong number
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                    </svg>
-                                </div>
-                            </summary>
-                            <div class="pb-4 text-secondary-500">Sorry for disturbing,  thank you </div>
-                        </details>
                         <details class="group">
                             <summary
                                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
@@ -101,24 +67,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">This is  (YOUR NAME) and I am calling on behalf of Prof MR S Muraleedharan sir, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?</div>
-                        </details>
-                        <details class="group">
-                            <summary
-                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
-                                If not available 
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-                                    </svg>
-                                </div>
-                            </summary>
-                            <div class="pb-4 text-secondary-500">I am so sorry to disturb you, (Sir/Ma'am). What time is suitable to call you back?(<b>Note down the time</b>) Thank you, (Sir/ Ma'am).(End Call)</div> 
+                            <div class="pb-4 text-secondary-500">This is  (Your Name) and I am calling on behalf of Prof MR S Muraleedharan sir, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?</div>
                         </details>
                         <details class="group">
                             <summary
@@ -157,6 +106,60 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                 (End Call)
                             </div> 
                         </details>
+                        <details class="group">
+                            <summary
+                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
+                                If not available 
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="pb-4 text-secondary-500">I am so sorry to disturb you, (Sir/Ma'am). What time is suitable to call you back?(<b>Note down the time</b>) Thank you, (Sir/ Ma'am).(End Call)</div> 
+                        </details>
+                       
+                        <details class="group" open>
+                            <summary
+                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
+                                <span className='font-semibold'>If wrong company </span>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="pb-4 text-secondary-500">Sorry, can you please tell me in which company your currently working at ?(<b>Note it down</b>).</div>
+                        </details>
+                        <details class="group">
+                            <summary
+                                class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
+                                If wrong number
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="block h-5 w-5 group-open:hidden">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" class="hidden h-5 w-5 group-open:block">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="pb-4 text-secondary-500">Sorry for disturbing,  thank you </div>
+                        </details>
+                       
+                       
                     </div>
                     </div>
                 </div>

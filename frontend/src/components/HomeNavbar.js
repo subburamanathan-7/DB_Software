@@ -17,12 +17,12 @@ function  Test() {
                         </div>
                         <div>
                             <ul className=' text-lg flex items-center gap-[4vw]'>
-                                <li>
+                                {/* <li>
                                     <a href='/hr-pitch'>HR Pitch</a>
                                 </li>
                                 <li>
                                     <a href='/faq'>FAQs</a>
-                                </li>
+                                </li> */}
                                 {/* <li>
                                     <a  href='/'>About</a>
                                 </li> */}
@@ -34,12 +34,22 @@ function  Test() {
                         </div> */}
                     </nav>
                 </header>
-                <div>
-                    <div className='mx-[23%] my-[18%] max-w-2xl min-w-screen '>
-                        <p className='text-2xl font-base text-center '>Mock placements is a flagship event organized by FORESE. Each year we have an attendance over 100 HRs and other technical personel from several companies who are invited to examine the technical strength of about 800+ pre final year students.</p>
-                        <div className='text-center mt-[3%]'>
-                            <button className='bg-[#DBDFEA] text-xl font-semibold text-[#000000] px-[5%] py-2 rounded-full hover:bg-[#ACB1D6] hover:text-white hover:z-90 duration-150' onClick={()=>navigate('/login')}>
-                                Sign In</button>
+                <div className=''>
+                    <div className='flex items-center justify-center'>
+                    <img 
+                        className='object-fill h-40 w-80 m-[2%] p-[2%]'
+                        alt='logo'
+                        src={forese} />
+
+                    </div>
+                    <div className=' mt-[6%]'>
+                        <div className='flex items-center justify-center'>
+                        <p className='text-xl font-semibold max-w-2xl text-center '>Mock placements is a flagship event organized by FORESE. Each year we have an attendance over 100 HRs and other technical personel from several companies who are invited to examine the technical strength of about 800+ pre final year students.</p>
+                        </div>
+                        <div className='mt-[3%] flex items-center justify-center'>
+                            <button className='bg-[#DBDFEA] text-xl font-semibold content-center px-[4%] py-2 rounded-full hover:bg-[#ACB1D6] hover:text-white hover:z-90 duration-200' onClick={()=>navigate('/login')}>
+                                Sign In
+                            </button>
                         </div>
                     </div>
                     {/* Footer */}

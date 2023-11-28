@@ -1,27 +1,28 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import{useQuery, useQueryClient} from '@tanstack/react-query'
+import {toast} from 'react-toastify'
+
 
 import DashNavbar from '../components/DashNavbar'
 import Card from '../components/Card'
 import Modal from '../components/Modal'
 import ContactForm from '../components/ContactForm'
-import {Spinner} from '../components/Spinner'
 
 import { useNavigate } from "react-router-dom"
 
 import {listContacts} from '../features/contacts/ContactServices'
-import { getMyTeam, getUsers } from '../features/users/UserServices'
+import { getUsers } from '../features/users/UserServices'
 
 import UpdateContactForm from '../components/UpdateContactForm'
 import DeleteContactForm from '../components/DeleteContactForm'
-import SearchNotFound from '../components/SearchNotFound'
 
 function DirectorsDashboard() {
     const navigate = useNavigate()
 
     useEffect(()=>{
         if(!sessionStorage.getItem('user')){
-          navigate('/login')
+          navigate('/login');
+        
         //   setResponseData(null)
         }
       },[]);
@@ -53,7 +54,7 @@ function DirectorsDashboard() {
     const [searchParam, setSearchParam] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [currentUserID,setCurrentUserID] = useState(null)
-    
+
     const [statusResponseData,setStatusResponseData] = useState({
         notCalled:0,
         calledAccepted:0,
@@ -91,18 +92,19 @@ function DirectorsDashboard() {
     })     
     
     if(getUserQuery.isLoading){
-        <Spinner/>
+        // <Spinner/>
     }
     else if(getUserQuery.isFetched){
         getUserQuery.data.users.map((user)=>{
             let username = user.email.substring(0,user.email.length-10)
             username = username.charAt(0).toUpperCase() + username.slice(1)
-
             usersMap[user._id]=username
+
+            // return null;
         })
     }
     if(listContactMutation.isLoading){
-        <Spinner/>
+        // <Spinner/>
     }
     else if(listContactMutation.isFetched ){
         Object.keys(statusResponseData).forEach(v => statusResponseData[v] = 0)
@@ -111,6 +113,8 @@ function DirectorsDashboard() {
         content.map((contact)=>{
             statusResponseData[contact.status]+=1
             totalContacts+=1;
+            // return null;
+
         })
         !isChecked ?
         filteredData = content.filter(item =>
@@ -125,6 +129,8 @@ function DirectorsDashboard() {
             filteredData = filteredData.filter(item=>
                 item.status===filterParam)
         }
+        
+     
         filteredData=filteredData.reverse()
         content= filteredData.map((contact)=>{
             return(

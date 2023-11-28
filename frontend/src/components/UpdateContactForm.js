@@ -1,14 +1,14 @@
 import React, {useState } from 'react'
 import{useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+
 
 import {updateContact, getContact} from '../features/contacts/ContactServices' 
-import { Spinner } from './Spinner'
-
 import { getUsers,getDirectors } from '../features/users/UserServices'
 
 function UpdateContactForm(currentUserID,onClose) {
     const [userId,setUserId] = useState(currentUserID.currentUserID)
-    const [teamSplit,setMyTeamSplit]=useState({})
+    // const [teamSplit,setMyTeamSplit]=useState({})
 
     const queryClient = useQueryClient()
     const [formData,setFormData]= useState({
@@ -28,7 +28,7 @@ function UpdateContactForm(currentUserID,onClose) {
         comments:''
     })
     let usersMap={}
-    let myteam
+    // let myteam
     //Get My Team
     const getDirectorsQuery = useQuery({
         queryKey:['directors'],
@@ -56,6 +56,7 @@ function UpdateContactForm(currentUserID,onClose) {
             // console.log(getUserQuery.data.users)
             getUserQuery.data.users.map((user)=>{
                 usersMap[user.email.substring(0,user.email.length-10)]=user._id
+                // return null;
             })
         }
     }
@@ -70,7 +71,29 @@ function UpdateContactForm(currentUserID,onClose) {
             queryClient.invalidateQueries(["contacts"])
             queryClient.invalidateQueries(["teamcontacts"])
             queryClient.invalidateQueries(["globalContacts"])
+            toast.success(`Contact Updated Successfully`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         },
+        onError:(message)=>{
+            toast.error(`Try Again`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }
     })
     // Get Contact
     const getContactQuery = useQuery({
@@ -118,8 +141,22 @@ function UpdateContactForm(currentUserID,onClose) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
-        updateContactMutation.mutate()
+        if(formData.contactNumber.length!=10){
+            toast.warn('Enter a valid contact number', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+        else{
+            console.log(formData)
+            updateContactMutation.mutate()
+        }
     }
     
   return (
@@ -146,7 +183,7 @@ function UpdateContactForm(currentUserID,onClose) {
                         <div className='grid grid-cols-2 gap-2 mt-2'>
                             <select name="status" id="status" className='border py-1 px-2 border-[#A9A9A9] rounded'
                             value={formData.status} onChange={handleChange}
-                            required>
+                            >
                                 <option value='' disabled selected hidden>Choose Contact Status...</option>
                                 <option value="notCalled">Not Called</option>
                                 <option value="calledAccepted">Called/Accepted</option>
@@ -160,7 +197,7 @@ function UpdateContactForm(currentUserID,onClose) {
                             </select>
                             <select name="interviewMode" id="interviewMode" className='border py-1 px-2 border-[#A9A9A9] rounded'
                             value={formData.interviewMode} onChange={handleChange}
-                            required>
+                            >
                                 <option value='' disabled selected hidden>Choose Interview Mode...</option>
                                 <option value="online">Online</option>
                                 <option value="offline">Offline</option>
@@ -173,12 +210,12 @@ function UpdateContactForm(currentUserID,onClose) {
                             value={formData.HRCount} 
                             onChange={handleChange}
                             min={0}
-                            required/>
+                            />
                             <select name="transport" id="transport" 
                             className='border py-1 px-2 border-[#87acec] rounded mr-2'
                             value={formData.transport} 
                             onChange={handleChange}
-                            required>
+                            >
                             <option value='' disabled selected hidden>Transportation Mode...</option>
                             <option value="own">Own</option>
                             <option value="Cab">Cab</option>
@@ -187,7 +224,7 @@ function UpdateContactForm(currentUserID,onClose) {
                             className='border py-1 px-2 border-[#87acec] rounded w-2/5'
                             value={formData.internship} 
                             onChange={handleChange}
-                            required>
+                            >
                                 <option value='' disabled selected hidden>Internship ...</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
@@ -242,5 +279,4 @@ function UpdateContactForm(currentUserID,onClose) {
    </>
   )
 }
-
 export default UpdateContactForm

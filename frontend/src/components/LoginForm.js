@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom"
 import{useMutation, useQueryClient} from '@tanstack/react-query'
 import {toast} from 'react-toastify'
 
-import {currentUserContext} from '../App'
-
 import {login} from "../features/users/UserServices"
+import {currentUserContext} from '../App'
 
 function Form() {
     const [formData, setFormData] = useState({email:"", password:"", role:""})
@@ -19,12 +18,24 @@ function Form() {
         onSuccess:(data)=>{
             queryClient.invalidateQueries(["user"], { exact: true })
             setCurrentUser(sessionStorage.getItem('user'))
-            
 
             sessionStorage.setItem('email',data.email)
             sessionStorage.setItem('role',data.role)
             sessionStorage.setItem('incharge',data.incharge)
-
+            let username = data.email.substring(0,data.email.length-10)
+            username = username.charAt(0).toUpperCase() + username.slice(1)
+            
+            toast.success(`Hello ${username}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            
             if(data.role ==='Member'){
                 navigate('/dashboard')
             }
@@ -33,8 +44,16 @@ function Form() {
             }
         },
         onError:(message)=>{
-            console.log(message)
-            toast.error(message)
+            toast.error(`Invalid credentials`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
         
     })
@@ -46,14 +65,27 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
-        loginMutation.mutate({
-            email:formData.email,
-            password:formData.password,
-            role:formData.role
-        })
-        if(loginMutation.error){
-            toast.error('UC')
+        if(!formData.email || !formData.password || !formData.role){
+            toast.warn('Enter all the details', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
+        else{
+            loginMutation.mutate({
+                email:formData.email,
+                password:formData.password,
+                role:formData.role
+            })
+        }
+        
+       
     }
     return (
         <>
@@ -98,8 +130,7 @@ function Form() {
                     <div className='mt-5'>
                         <button type='submit' 
                         className='cursor-pointer border-2 bg-[#7286D3] text-white py-1 w-full rounded font-semibold hover:opacity-75  hover:z-90 duration-150 ' 
-                        onClick={handleSubmit}
-                        disabled={!formData.email || !formData.password || !formData.role}>
+                        onClick={handleSubmit}>
                         Submit</button>
                     </div>
                 </form>
@@ -109,3 +140,6 @@ function Form() {
 }
 
 export default Form
+
+
+// disabled={!formData.email || !formData.password || !formData.role}

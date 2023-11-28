@@ -29,7 +29,7 @@ const contactSchema = mongoose.Schema(
             // required:[true,'Please add a email']
         },
         status:{
-            type:String,
+            type:String, 
             enum:[
                 'notCalled',
                 'calledAccepted',
@@ -47,6 +47,7 @@ const contactSchema = mongoose.Schema(
         interviewMode:{
             type:String,
             enum:[
+                '',
                 'online',
                 'offline',
                 'onlineOffline'

@@ -2,11 +2,8 @@ import React, { Fragment, useState,useEffect } from 'react'
 import{useQuery, useQueryClient} from '@tanstack/react-query'
 import { useNavigate } from "react-router-dom"
 
-
 import DashNavbar from '../components/DashNavbar'
 import Card from '../components/Card'
-
-import { Spinner } from '../components/Spinner'
 
 import { globalListContacts} from '../features/contacts/ContactServices'
 import { getUsers } from '../features/users/UserServices'
@@ -17,7 +14,7 @@ function GlobalHR() {
 
     useEffect(()=>{
         if(!sessionStorage.getItem('user')){
-          navigate('/login')
+          navigate('/login');
         //   setResponseData(null)
         }
       },[]);
@@ -78,16 +75,20 @@ function GlobalHR() {
         },
     }) 
     if(getUserQuery.isLoading){
-        <Spinner/>
+        // <Spinner/>
     }
     else if(getUserQuery.isFetched){
         getUserQuery.data.users.map((user)=>{
-            usersMap[user._id]=user.email.substring(0,user.email.length-10)
+            let username = user.email.substring(0,user.email.length-10)
+            username = username.charAt(0).toUpperCase() + username.slice(1)
+            usersMap[user._id]=username
+            // return null;
+
         })
     }
-    console.log(usersMap)
+    // console.log(usersMap)
     if(globalListContactMutation.isLoading){
-        <Spinner/>
+        // <Spinner/>
     }
     else if(globalListContactMutation.isFetched ){
         Object.keys(statusResponseData).forEach(v => statusResponseData[v] = 0)
@@ -96,6 +97,8 @@ function GlobalHR() {
         content.map((contact)=>{
             statusResponseData[contact.status]+=1
             totalContacts+=1;
+            // return null;
+
         })
         !isChecked ?
         filteredData = content.filter(item =>

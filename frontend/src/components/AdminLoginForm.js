@@ -1,6 +1,8 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { useNavigate } from "react-router-dom"
 import{useMutation, useQueryClient} from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+
 import {currentUserContext} from '../App'
 
 
@@ -21,11 +23,46 @@ function AdminForm() {
             sessionStorage.setItem('email',data.email)
             sessionStorage.setItem('role',data.role)
             sessionStorage.setItem('incharge',data.incharge)
+            toast.success(`Hello Admin`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
 
         //   console.log(data)
             navigate('/ddashboard')
+        },
+        onError:(message)=>{
+            toast.error(`Invalid credentials`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
-      })
+    })
+    useEffect(()=>{
+        toast("Hello Shreya")
+        toast.error('Hi Ram', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    },[])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,11 +71,26 @@ function AdminForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
-        loginMutation.mutate({
-            email:formData.email,
-            password:formData.password,
-            role:formData.role
-        })
+        if(!formData.email || !formData.password || !formData.role){
+            toast.warn('Enter all the details', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+        }
+        else{
+            loginMutation.mutate({
+                email:formData.email,
+                password:formData.password,
+                role:formData.role
+            })
+        }
+        
     }
     return (
         <>

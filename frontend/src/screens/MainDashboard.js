@@ -7,7 +7,6 @@ import DashNavbar from '../components/DashNavbar'
 import Card from '../components/Card'
 import Modal from '../components/Modal'
 import ContactForm from '../components/ContactForm'
-import {Spinner} from '../components/Spinner'
 
 import {listContacts} from '../features/contacts/ContactServices'
 import UpdateContactForm from '../components/UpdateContactForm'
@@ -20,7 +19,7 @@ function MainDashboard() {
 
     useEffect(()=>{
         if(!sessionStorage.getItem('user')){
-          navigate('/login')
+          navigate('/login');
         //   setResponseData(null)
         }
       },[]);
@@ -29,7 +28,6 @@ function MainDashboard() {
     let content=""
     let filteredData
     let totalContacts
-    let color
 
     let statusMap ={
         'notCalled':'Not Called',
@@ -55,7 +53,7 @@ function MainDashboard() {
     const [searchParam, setSearchParam] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [currentUserID,setCurrentUserID] = useState(null)
-    const [currentHeight, setCurrentHeight] = useState('')
+    // const [currentHeight, setCurrentHeight] = useState('')
     const [statusResponseData,setStatusResponseData] = useState({
         notCalled:0,
         calledAccepted:0,
@@ -92,7 +90,7 @@ function MainDashboard() {
     //     setSearchParam(' ')      
     // })
     if(listContactMutation.isLoading){
-        <Spinner/>
+        // <Spinner/>
     }
     else if(listContactMutation.isFetched ){
         Object.keys(statusResponseData).forEach(v => statusResponseData[v] = 0)
@@ -101,6 +99,7 @@ function MainDashboard() {
         content.map((contact)=>{
             statusResponseData[contact.status]+=1
             totalContacts+=1;
+            return null;
         })
         !isChecked ?
         filteredData = content.filter(item =>
@@ -235,7 +234,6 @@ function MainDashboard() {
                                     isChecked ? 'rounded-md bg-white bg-opacity-60' : 'bg-[#]'
                                 }`}
                                 // True- BY Number
-
                                 >
                                 Number
                                 </span>
@@ -298,3 +296,4 @@ function MainDashboard() {
 export default MainDashboard
 
 
+ 

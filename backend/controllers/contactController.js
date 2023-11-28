@@ -139,6 +139,12 @@ const updateContact = asyncHandler(async(req,res)=>{
         res.status(400)
         throw new Error('Contact not listed')
     }
+    const contactNumber = req.body.contactNumber;
+    const ContactExists = await Contacts.findOne({contactNumber})
+    if(ContactExists){
+        res.status(400)
+        throw new Error('HR Already Exists')
+    }
     const updatedContact = await Contacts.findByIdAndUpdate(req.params.id,req.body,{new:true})
     res.status(201).json({updatedContact})
 })

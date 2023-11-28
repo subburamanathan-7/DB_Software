@@ -1,8 +1,8 @@
 import React, {useState } from 'react'
 import{useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
+import {toast} from 'react-toastify'
 
 import {deleteContact, getContact} from '../features/contacts/ContactServices' 
-import { Spinner } from './Spinner'
 
 function DeleteContactForm(currentUserID,onClose) {
     const [userId,setUserId] = useState(currentUserID.currentUserID)
@@ -23,7 +23,28 @@ function DeleteContactForm(currentUserID,onClose) {
             queryClient.invalidateQueries(["teamcontacts"])
             queryClient.invalidateQueries(["globalContacts"])
 
-
+            toast.success('Contact Deleted Succesfully', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        },
+        onError:(message)=>{
+            toast.error(`Try Again`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } 
     })
     // Get Contact

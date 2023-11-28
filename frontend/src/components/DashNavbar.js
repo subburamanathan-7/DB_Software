@@ -1,8 +1,11 @@
-import React,{useContext, useState} from 'react'
+import React,{useContext, useState, Fragment} from 'react'
+import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Modal from './Modal'
-import FileUploadForm from './FileUploadForm'
+import { Menu, Transition } from '@headlessui/react'
 
+
+import FileUploadForm from './FileUploadForm'
 import {currentUserContext} from '../App'
 const forese = require('../forese.png')
 // const forese = require('../forese_logo.png')
@@ -21,6 +24,17 @@ function DashNavbar() {
         sessionStorage.removeItem('email')
         sessionStorage.removeItem('role')
         sessionStorage.removeItem('incharge')
+
+        toast.success('Logout Succesfully', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         setCurrentUser(null)
         navigate('/login')
     }
@@ -30,16 +44,69 @@ function DashNavbar() {
     
   return (
    <>
-        <header className='bg-[#8294C4]'>
+        <header className='bg-[#8294C4] mb-[2%]'>
             <nav className='flex justify-between items-center w-[92%] mx-auto py-2'>
                 <div>
                     <img className='w-16'
+                    alt='forese-logo'
                     src={forese} />
                 </div>
                 <div className='flex justify-end '>
-                    
-                    
+                    {/* <div className='ml-2 mr-2'>
+                        <button className='bg-[#DBDFEA] text-[#000000] px-14 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/faq')}>FAQs  
+                        </button>
+                    </div>
+                    <div className='mr-2 ml-2'>
+                        <button className='bg-[#DBDFEA] text-[#000000] px-12 py-2 rounded-full hover:scale-95 duration-150'onClick={()=>navigate('/hr-pitch')} >HR Pitch  
+                        </button>
+                    </div> */}
                     {
+                        currentUserRole==='Director'?
+                        (
+                            <div className='mr-2 ml-2'>
+                                {
+                                    currentRoute.includes('globalHR')
+                                    ?
+                                    <button className='bg-[#DBDFEA] text-[#000000] px-8 py-2 rounded-full hover: scale-95 duration-150' onClick={()=>navigate('/ddashboard')}>Dashboard</button>
+                                    :
+                                    <button className='bg-[#DBDFEA] text-[#000000] px-8 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/globalHR')}>Global HR</button>
+                                } 
+                                
+                            </div>
+                        ):(<></>)
+                    }
+
+                    <button className=' mr-2 ml-2 bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>{
+                        setShowUploadModal(true)
+                        }}>Upload Contacts 
+                    </button>
+                    
+
+                    {/* <div className=' ml-2 '>
+                        <button className='bg-[#DBDFEA] text-[#000000]  px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={handleLogout}>Logout</button>
+                    </div> */}
+                    {/* {
+                        currentUserRole==='Member'?(
+                            <div className='mr-2 ml-2'>
+                                <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full flex  items-center justify-between'>
+                                    <i className=" fa-solid fa-people-group px-2"></i>
+                                    Hello {user}
+                                </button>
+                            </div>
+                    
+                        ):(
+                            <div className='mr-2 ml-2'>
+                                <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full flex  items-center justify-between'>
+                                    <i className="fa-solid fa-user-tie px-2"></i>
+                                    Hello {user}
+                                </button>
+                            </div>
+                        )
+                    } */}
+                    <Menu as="div" className="relative inline-block text-left">
+                          <div>
+                            <Menu.Button className="">
+                            {
                         currentUserRole==='Member'?(
                             <div className='mr-2 ml-2'>
                                 <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full flex  items-center justify-between'>
@@ -57,38 +124,52 @@ function DashNavbar() {
                             </div>
                         )
                     }
-                    <button className=' mr-2 ml-2 bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>{
-                        setShowUploadModal(true)
-                        }}>Upload Contacts 
-                    </button>
+                            </Menu.Button>
+                          </div>
                     
-                    {
-                        currentUserRole==='Director'?
-                        (
-                            <div className='mr-2 ml-2'>
-                                {
-                                    currentRoute.includes('globalHR')
-                                    ?
-                                    <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover: scale-95 duration-150' onClick={()=>navigate('/ddashboard')}>Dashboard</button>
-                                    :
-                                    <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/globalHR')}>Global HR</button>
-                                } 
-                                
-                            </div>
-                        ):(<></>)
-                    }
-                    <div className='mr-2 ml-2'>
-                    <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover:scale-95 duration-150'onClick={()=>navigate('/hr-pitch')} >HR Pitch  
-                    </button>
-                    </div>
-                    <div className='ml-2 mr-2'>
-                    <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/faq')}>FAQs  
-                    </button>
-                    </div>
+                          <Transition
+                            as={Fragment}
+                          >
+                            <Menu.Items className="absolute right-0 z-10 mt-2 rounded-full">
+                              <div className="py-1">
+                                <Menu.Item>
+                                  {({ active }) => (
+                                   <div className='ml-2 mt-1'>
+                                   <button className='bg-[#8294C4] text-[#000000] px-10 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/faq')}>
+                                    FAQs  
+                                   </button>
+                                    </div>
 
-                    <div className=' ml-2 '>
-                        <button className='bg-[#DBDFEA] text-[#000000]  px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={handleLogout}>Logout</button>
-                    </div>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                   <div className='ml-2 mt-1'>
+                                   <button className='bg-[#8294C4] text-[#000000] px-8 py-2 rounded-full hover:scale-95 duration-150'onClick={()=>navigate('/hr-pitch')}>
+                                    HR Pitch  
+                                   
+                                   </button>
+                                    </div>
+
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <div className='ml-2 mt-1'>
+                                    <button className='bg-[#8294C4] text-[#000000]  px-6 py-2 rounded-full hover:scale-95 duration-150' onClick={handleLogout}>
+                                    <i className=" px-2 fa-solid fa-arrow-right-from-bracket"></i>    
+                                    Logout
+                                    </button>
+                                    </div>
+
+                                  )}
+                                </Menu.Item>
+                               
+                              </div>
+                             
+                            </Menu.Items>
+                          </Transition>
+                    </Menu>
                 </div>
             </nav>
         </header>
