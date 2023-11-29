@@ -7,7 +7,7 @@ import { Menu, Transition } from '@headlessui/react'
 
 import FileUploadForm from './FileUploadForm'
 import {currentUserContext} from '../App'
-const forese = require('../forese.png')
+const forese = require('../assets/forese.png')
 // const forese = require('../forese_logo.png')
 
 

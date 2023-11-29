@@ -65,13 +65,11 @@ const contactSchema = mongoose.Schema(
         internship:{
             type:String,
             // required:[true,'Please add the intership detail']
-
         },
-        dept:{
-            type:Array
-
+        department:{
+            type:String
         },
-        // department:{[
+        // dept:[{
         //     INT:Boolean,
         //     CSE:Boolean,
         //     ADS:Boolean,
@@ -83,7 +81,7 @@ const contactSchema = mongoose.Schema(
         //     AUT:Boolean,
         //     MEC:Boolean,
         //     MAR:Boolean,
-        // ]},
+        // }],
         comments:{
             type:String,
         },

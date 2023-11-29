@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-const forese = require('../forese.png')
+const forese = require('../assets/forese.png')
 
 function HRPitch() {
 

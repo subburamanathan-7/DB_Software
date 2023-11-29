@@ -6,7 +6,6 @@ const Volunteers = require('../models/volunteerModel')
 // @desc getHR
 // @route GET/api/database
 // @Private{Director,Volunteer}
-
 const listContacts = asyncHandler(async(req,res)=>{
     let contacts
     if(req.user.role === 'Director'){
@@ -58,7 +57,6 @@ const globalList = asyncHandler(async(req,res)=>{
 // @desc addHR
 // @route POST/api/database
 // @access Private {Director,Volunteer}
-
 const addContact = asyncHandler(async(req,res)=>{
     const {
         name, 
@@ -153,7 +151,6 @@ const updateContact = asyncHandler(async(req,res)=>{
 // @desc transferContact
 // @route PUT/api/database/transfer/:id
 // @access Private{Director}
-
 const transferContact = asyncHandler(async(req,res)=>{
     const contact = await Contacts.findById(req.params.id);
     if(!req.user){
@@ -170,7 +167,6 @@ const transferContact = asyncHandler(async(req,res)=>{
 // @desc deleteHR
 // @route DEL/api/database/:id
 // @access Private {Director,Volunteer,Admin}
-
 const deleteContact = asyncHandler(async(req,res)=>{
     const contact = await Contacts.findById(req.params.id);
     if(!req.user){
@@ -200,41 +196,42 @@ const deleteContact = asyncHandler(async(req,res)=>{
 // @desc Upload CSV
 // @route POST/api/database/upload
 // @access Private {Director,Volunteer}
-
 const fileUpload = asyncHandler(async(req,res)=>{
     
     let contacts = req.body
-    let i
-    // contacts = contacts.splice(1,contacts.length-1)s
-    console.log(contacts.length)
-    console.log(contacts)
+    let i,contactNumber
+    // console.log(contacts.length)
+    // console.log(contacts)
 
     for(i=0;i<contacts.length;i++){
-        let j = contacts[`${i}`][2]
-        console.log(j)
-        const ContactExists = await Contacts.findOne({j})
-        if(ContactExists){
-            continue
-        }
-        else{
-            const newHR = await Contacts.create({
-                volunteer:req.user.role ==='Member'?req.user.id:null,
-                incharge:req.user.role ==='Member'?req.user.incharge:req.user.id,
-                name:contacts[`${i}`][0],
-                company:contacts[`${i}`][1],
-                contactNumber:contacts[`${i}`][2],
-                status:contacts[`${i}`][3],
-                email:contacts[`${i}`][4],
-                interviewMode:contacts[`${i}`][5],
-                HRCount:contacts[`${i}`][6],
-                transport:contacts[`${i}`][7],
-                address:contacts[`${i}`][8],
-                internship:contacts[`${i}`][9],
-                comments:contacts[`${i}`][10]
-            })
-            console.log(newHR)
-            if(newHR){
-                console.log('HR added Succesfully')
+        if(contacts[`${i}`][0] && contacts[`${i}`][2] && contacts[`${i}`][3]){
+            contactNumber = contacts[`${i}`][2];
+            const ContactExists = await Contacts.findOne({contactNumber})
+            if(ContactExists || contactNumber.length!=10){
+                continue
+            }
+            else{
+                const newHR = await Contacts.create({
+                    volunteer:req.user.role ==='Member'?req.user.id:null,
+                    incharge:req.user.role ==='Member'?req.user.incharge:req.user.id,
+                    name:contacts[`${i}`][0]?contacts[`${i}`][0]:null,
+                    company:contacts[`${i}`][1]?contacts[`${i}`][1]:null,
+                    contactNumber:contacts[`${i}`][2]?contacts[`${i}`][2]:null,
+                    status:contacts[`${i}`][3]?contacts[`${i}`][3]:null,
+                    email:contacts[`${i}`][4]?contacts[`${i}`][4]:null,
+                    interviewMode:contacts[`${i}`][5]?contacts[`${i}`][5]:null,
+                    HRCount:contacts[`${i}`][6]?contacts[`${i}`][6]:null,
+                    transport:contacts[`${i}`][7]?contacts[`${i}`][7]:null,
+                    address:contacts[`${i}`][8]?contacts[`${i}`][8]:null,
+                    internship:contacts[`${i}`][9]?contacts[`${i}`][9]:null,
+                    comments:contacts[`${i}`][10]?contacts[`${i}`][10]:null
+
+                })
+                // console.log(newHR)
+                if(newHR){
+                    // console.log('HR added Succesfully')
+                    
+                }
             }
         }
     }
@@ -249,3 +246,4 @@ module.exports = {
     transferContact,
     fileUpload
 }
+

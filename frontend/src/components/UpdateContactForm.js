@@ -111,13 +111,13 @@ function UpdateContactForm(currentUserID,onClose) {
     //     // getContactQuery.refetch()
     // {}
     if(getContactQuery.isLoading || getContactQuery.isFetching){
-        console.log("Loading")
+        // console.log("Loading")
 
     }
     else{
-        console.log(userId)
+        // console.log(userId)
         setUserId(null)    
-        console.log(getContactQuery.data)
+        // console.log(getContactQuery.data)
         const currentState = {
             name:getContactQuery.data.name,
             company:getContactQuery.data.company,
@@ -154,7 +154,7 @@ function UpdateContactForm(currentUserID,onClose) {
             });
         }
         else{
-            console.log(formData)
+            // console.log(formData)
             updateContactMutation.mutate()
         }
     }

@@ -46,8 +46,7 @@ const registerVolunteer = asyncHandler(async(req,res)=>{
             res.status(400)
             throw new Error('Unsuccessful Registration')
         }
-    }
-    
+    }  
 })
 
 // @desc loginVolunteer

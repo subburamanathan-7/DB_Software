@@ -64,7 +64,7 @@ function ContactForm(currentUserID,onClose) {
     const handleSubmit = (e) => {
         e.preventDefault(); 
         console.log(formData)
-        console.log(formData.contactNumber.length)
+        // console.log(formData.contactNumber.length)
         if(!formData.contactNumber || !formData.status){
             toast.warn('Enter the necessary details', {
                 position: "top-right",

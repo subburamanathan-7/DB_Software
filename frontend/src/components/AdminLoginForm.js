@@ -50,20 +50,7 @@ function AdminForm() {
                 });
         }
     })
-    useEffect(()=>{
-        toast("Hello Shreya")
-        toast.error('Hi Ram', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-    },[])
-
+   
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));

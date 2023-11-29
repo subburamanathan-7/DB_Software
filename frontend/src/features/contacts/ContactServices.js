@@ -49,7 +49,7 @@ export const addContact = async(contactData,token)=>{
         },
     }
     const response = await axios.post(API_URL,contactData,config)
-    console.log(response.data)
+    // console.log(response.data)
     return response.data
 }
 export const updateContact = async(contactID,contactData,token)=>{
@@ -75,18 +75,19 @@ export const deleteContact = async(contactId,token)=>{
   // console.log(response.data)
   return response.data
 }
+
+
 export const FileUpload = async(formData,token)=>{
-  console.log("F",formData)
+//   console.log(formData)
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-  const response = await axios.post(API_URL+'upload',formData,config)
-  console.log(response.data)
-  return response.data
-
+	const config = {
+		headers: {
+    		Authorization: `Bearer ${token}`,
+    	},
+  	}
+	const response = await axios.post(API_URL+'upload',formData,config)
+	// console.log(response.data)
+	return response.data
 }
 
 

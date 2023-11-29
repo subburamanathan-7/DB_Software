@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 
-const forese = require('../forese.png')
+const forese = require('../assets/forese.png')
 function  Test() {
     const navigate = useNavigate()
     return (

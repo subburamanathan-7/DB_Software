@@ -7,50 +7,57 @@ import { useNavigate } from "react-router-dom"
 
 
 const FileUploadForm = () => {
-  const navigate = useNavigate()
+	const navigate = useNavigate()
+	let arrayData=[],count=0;
 
     useEffect(()=>{
         if(!sessionStorage.getItem('user')){
           navigate('/login')
         //   setResponseData(null)
         }
-      },[]);
+    },[]);
     
-  const queryClient = useQueryClient()
-  const [file, setFile] = useState(null);
-  const [CSVData, setCSVData] = useState(null);
+	const queryClient = useQueryClient()
+	const [file, setFile] = useState(null);
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-  const fileUploadMutation = useMutation({
-    mutationFn: ()=>{
-      return FileUpload(CSVData,sessionStorage.getItem('user'))
-    },
-    onSuccess:(data)=>{
-      //Object.keys(responseData).forEach(v => responseData[v] = 0)
-      queryClient.invalidateQueries(['contacts'])
+	const handleFileChange = (e) => {
+		setFile(e.target.files[0]);
+	};
 
-    }
-})
+	const fileUploadMutation = useMutation({
+		mutationFn: ()=>{
+			return FileUpload(arrayData,sessionStorage.getItem('user'))
+		},
+		onSuccess:(data)=>{
+		//Object.keys(responseData).forEach(v => responseData[v] = 0)
+		queryClient.invalidateQueries(['contacts'])
 
-  const handleUpload = () => {
-    if (file) {
-        // console.log(file);
-        Papa.parse(file, {
-            complete: function(results) {
-              let CData = results.data
-              delete CData['0']
-              console.log("Finished:", CData);
-              // console.log("Finished");
-              setCSVData(CData)
-              console.log(CSVData)
+		}
+	})
 
-              fileUploadMutation.mutate()
-            }}
-          )
-      }
-  };
+	const handleUpload = () => {
+		if (file) {
+			// console.log(file);
+			Papa.parse(file, {
+				step: function(row) {
+					// console.log("Row:", row.data);
+					count++;
+					if(count>1){
+						// console.log(typeof(row.data))
+						arrayData.push(row.data)
+					}
+				},
+				complete: function(results) {
+					// let CData = results.data
+					// console.log(arrayData);
+
+					// console.log("Finished");
+
+					fileUploadMutation.mutate()
+				}}
+			)
+		}
+	};
   
   return (
     <>
