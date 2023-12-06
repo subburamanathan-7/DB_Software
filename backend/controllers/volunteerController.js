@@ -77,7 +77,6 @@ const loginVolunteer = asyncHandler(async(req,res)=>{
 
 const getMe = asyncHandler(async(req,res)=>{
     res.status(200).json(req.user)
-    // console.log(res)
 })
 
 

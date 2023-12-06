@@ -37,7 +37,7 @@ function DeleteContactForm(currentUserID,onClose) {
         onError:(message)=>{
             toast.error(`Try Again`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -83,7 +83,7 @@ function DeleteContactForm(currentUserID,onClose) {
 
     return (
         <>
-           <div className=''>
+        <div className=''>
             <div className='container mx-auto'>
                 <div className='flex flex-col py-10 px-12'>
                     <h3 className=' my-[1%] text-center font-semibold text-[#000000] text-2xl'>Delete Contact</h3>

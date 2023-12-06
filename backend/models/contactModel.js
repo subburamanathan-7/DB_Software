@@ -4,29 +4,23 @@ const contactSchema = mongoose.Schema(
     {
         volunteer:{
             type:mongoose.Schema.Types.ObjectId,
-            // required: true,
             ref: 'Volunteer', //Model Name
         },
         incharge:{
             type:mongoose.Schema.Types.ObjectId,
-            // required: true,
             ref: 'Volunteer', //Model Name
         },
         name:{
             type:String,
-            // required:[true,'Please add an name']
         },
         company:{
             type:String,
-            // required:[true,'Please add a company']
         },
         contactNumber:{
-            type:Number,
-            // required:[true,'Please add a contact']
+            type:String,
         },
         email:{
             type:String,
-            // required:[true,'Please add a email']
         },
         status:{
             type:String, 
@@ -39,19 +33,12 @@ const contactSchema = mongoose.Schema(
                 'emailedAccepted',
                 'emailedAwaitingResponse',
                 'emailedDeclined',
-                'blacklisteds'
-                    
+                'blacklisted'
                 ],
             default: 'notCalled'
         },
         interviewMode:{
             type:String,
-            enum:[
-                '',
-                'online',
-                'offline',
-                'onlineOffline'
-            ]
         },
         HRCount:{
             type:Number,
@@ -64,7 +51,6 @@ const contactSchema = mongoose.Schema(
         },
         internship:{
             type:String,
-            // required:[true,'Please add the intership detail']
         },
         department:{
             type:String

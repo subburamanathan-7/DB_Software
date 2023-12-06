@@ -1,7 +1,7 @@
 import React, {useState } from 'react'
 import{useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-
+import validator from 'validator'
 
 import {updateContact, getContact} from '../features/contacts/ContactServices' 
 import { getUsers,getDirectors } from '../features/users/UserServices'
@@ -27,6 +27,11 @@ function UpdateContactForm(currentUserID,onClose) {
         incharge:'',
         comments:''
     })
+    const [contactState, setcontactState] = useState(true)
+    const [companyState, setcompanyState] = useState(true)
+    const [statusState, setstatusState] = useState(true)
+    const [nameState, setnameState] = useState(true)
+
     let usersMap={}
     // let myteam
     //Get My Team
@@ -73,7 +78,7 @@ function UpdateContactForm(currentUserID,onClose) {
             queryClient.invalidateQueries(["globalContacts"])
             toast.success(`Contact Updated Successfully`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -83,9 +88,9 @@ function UpdateContactForm(currentUserID,onClose) {
             });
         },
         onError:(message)=>{
-            toast.error(`Try Again`, {
+            toast.error(`Contact Already Exists`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -112,7 +117,6 @@ function UpdateContactForm(currentUserID,onClose) {
     // {}
     if(getContactQuery.isLoading || getContactQuery.isFetching){
         // console.log("Loading")
-
     }
     else{
         // console.log(userId)
@@ -137,14 +141,59 @@ function UpdateContactForm(currentUserID,onClose) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+
+        if(name==='contactNumber'){
+            if(value.length===10 && validator.isMobilePhone(value)){
+                setcontactState(true)
+                toast.success('Valid Number', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
+            else{
+                setcontactState(false)
+            }
+        }
+        if(name ==='name'){
+            if(value){
+                setnameState(true)
+            }
+            else{
+                setnameState(false)
+            }
+        }
+        if(name ==='company'){
+            if(value){
+                setcompanyState(true)
+            }
+            else{
+                setcompanyState(false)
+            }
+        }
+        if(name ==='status'){
+            if(value){
+                setstatusState(true)
+            }
+            else{
+                setstatusState(false)
+            }
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(formData.contactNumber.length!=10){
-            toast.warn('Enter a valid contact number', {
+        if(!formData.contactNumber.length===10 && !validator.isMobilePhone(formData.contactNumber)){
+
+            setcontactState(true)
+            toast.success('Valid Number', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -154,7 +203,6 @@ function UpdateContactForm(currentUserID,onClose) {
             });
         }
         else{
-            // console.log(formData)
             updateContactMutation.mutate()
         }
     }
@@ -167,21 +215,22 @@ function UpdateContactForm(currentUserID,onClose) {
                     <h3 className='text-xl mb-4 text-center text-[#000000]'>Update Contact</h3>
                     <form>
                         <div className='grid grid-cols-2 gap-2'>
-                            <input className='border border-color1 py-1 px-2 border-[#A9A9A9] rounded' placeholder='Name'
-                            type='text' name='name' value={formData.name} onChange={handleChange}/>
-                            <input className='border-1 border-color1 py-1 px-2 border-[#A9A9A9] rounded' placeholder='Contact Number'
-                            type='text' name='contactNumber' value={formData.contactNumber} onChange={handleChange}/>
+                            
+                            <input className={`placeholder-[#000000] rounded-md border py-1 px-2 ${nameState?'border-green':'border-red'} rounded `} placeholder='Name'
+                            type='text' name='name' value={formData.name} onChange={handleChange} />
+                           <input className={`placeholder-[#000000] rounded-md border py-1 px-2 ${contactState?'border-green':'border-red'} rounded`} placeholder='Contact Number'
+                            type='text' name='contactNumber' value={formData.contactNumber} onChange={handleChange} />
                         </div>
                         <div className='mt-2'>
-                            <input className='border border-color1 py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Company Name'
+                            <input className={`placeholder-[#000000] rounded-md border py-1 px-2 ${companyState?'border-green':'border-red'} w-full rounded`} placeholder='Company Name'
                             type='text' name='company' value={formData.company} onChange={handleChange}/>
                         </div>
                         <div className='mt-2'>
-                            <input className='border border-color1 py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Email'
+                            <input className='border border py-1 px-2 border-[#A9A9A9] w-full rounded' placeholder='Email'
                             type='email' name='email' value={formData.email} onChange={handleChange}/>
                         </div>
                         <div className='grid grid-cols-2 gap-2 mt-2'>
-                            <select name="status" id="status" className='border py-1 px-2 border-[#A9A9A9] rounded'
+                        <select name="status" id="status" className= {`py-1 px-2  ${statusState?'border border-green':'border border-red'} rounded`}
                             value={formData.status} onChange={handleChange}
                             >
                                 <option value='' disabled selected hidden>Choose Contact Status...</option>
@@ -199,6 +248,7 @@ function UpdateContactForm(currentUserID,onClose) {
                             value={formData.interviewMode} onChange={handleChange}
                             >
                                 <option value='' disabled selected hidden>Choose Interview Mode...</option>
+                                <option value="notknown">Not Known</option>
                                 <option value="online">Online</option>
                                 <option value="offline">Offline</option>
                                 <option value="onlineOffline">Online/Offline</option>
@@ -217,6 +267,7 @@ function UpdateContactForm(currentUserID,onClose) {
                             onChange={handleChange}
                             >
                             <option value='' disabled selected hidden>Transportation Mode...</option>
+                            <option value="notknown">Not Known</option>
                             <option value="own">Own</option>
                             <option value="Cab">Cab</option>
                             </select>
@@ -226,17 +277,18 @@ function UpdateContactForm(currentUserID,onClose) {
                             onChange={handleChange}
                             >
                                 <option value='' disabled selected hidden>Internship ...</option>
+                                <option value="notknown">Not Known</option>
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
                         
                         <div className='mt-2'>
-                            <input className='border border-color1 py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Address'
+                            <input className='border border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Address'
                             value={formData.address} onChange={handleChange} name='address' type='textbox'/>
                         </div>
                         <div className='mt-2'>
-                            <input className='border border-color1 py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Comments'
+                            <input className='border border py-2 px-2 border-[#A9A9A9] w-full rounded' placeholder='Comments'
                             value={formData.comments} onChange={handleChange} name='comments' type='textbox'/>
                         </div>
                         {/* {
@@ -268,7 +320,7 @@ function UpdateContactForm(currentUserID,onClose) {
                         type='submit' onClick={handleSubmit}>
                             Save Contact
                         </button> */}
-                        <button className='bg-[#8EA7E9] text-[#000000] focus:outine-none font-medium text-sm rounded-lg px-5 py-2.5 text-center w-full mx-2 hover:scale-95'
+                        <button disabled={!statusState || !nameState || !companyState || !contactState} className='bg-[#8EA7E9] text-[#000000] focus:outine-none font-medium text-sm rounded-lg px-5 py-2.5 text-center w-full mx-2 hover:scale-95'
                         type='submit' id = 'submit' onClick={handleSubmit}>
                             Update Contact
                         </button>

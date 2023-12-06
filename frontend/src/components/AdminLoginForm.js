@@ -1,12 +1,13 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
 import{useMutation, useQueryClient} from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
 import {currentUserContext} from '../App'
-
-
 import {login} from "../features/users/UserServices"
+
+const forese = require('../assets/forese.png')
+
 
 function AdminForm() {
     const [formData, setFormData] = useState({email:"", password:"",role:"Admin"})
@@ -81,7 +82,15 @@ function AdminForm() {
     }
     return (
         <>
-            <div className='flex justify-center items-center h-screen bg-[#8EA7E9]'>
+            <div className='flex flex-col justify-center items-center h-screen bg-[#8EA7E9]'>
+                <div className='flex items-center justify-center mt-[-3%] py-[3%]'>
+                    <img 
+                        className='object-fill w-40'
+                        alt='logo'
+                        src={forese} />
+
+                </div>
+                
                 <form className='w-96 p-6 shadow-lg bg-white rounded-md text-[#7286D3]'>
                     <h2 className='text-2xl  block text-center font-semibold'><i className=' text-2xl fa-solid fa-user px-2'></i> Admin Login</h2>
                     <hr className='mt-3'/>

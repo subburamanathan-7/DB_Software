@@ -10,7 +10,6 @@ export const login = async(userData)=>{
                 // that falls out of the range of 2xx
                 // console.log(error.response.data.message);
                 throw new Error(error.response.data.message) 
-
                 // console.log(error.response.status);
                 // console.log(error.response.headers);
             } 

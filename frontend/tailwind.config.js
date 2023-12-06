@@ -14,26 +14,27 @@ module.exports = {
       lg:'1024px',	
       xl:'1280px',	
       '2xl':'1536px'
-
-
     },
+
     colors:{
       white:'#FFFFFF',
       color1:'#3A1078',
       color2:'#4E31AA',
       color3:'#2F58CD',
       color4:'#3795BD',
-      color5:'#0096FF'
-
+      color5:'#0096FF',
+      red:'#fc6262',
+      green:'#50C878'
     },
+
     extend: {
       fontFamily:{
         poppins:['Poppins'],
         raleway: ['Raleway'],
         inconsolata: ['Inconsolata'],
-
       }
     },
+    
   },
   plugins: [],
 }

@@ -7,44 +7,42 @@ function  Test() {
     return (
         <>
             <div className='font - [Poppins] bg-[#8EA7E9] min-h-screen'>
-                <header className='bg-[#DBDFEA]'>
-                    <nav className='flex justify-between items-center w-[92%] mx-auto py-2'>
+                <header className='bg-[#DBDFEA] '>
+                    <nav className='flex justify-between items-center w-[92%] mx-auto py-3'>
                         <div>
                             <img 
-                            className='w-14'
+                            className='w-20'
                             alt='logo'
                             src={forese} />
                         </div>
-                        <div>
+                        {/* <div>
                             <ul className=' text-lg flex items-center gap-[4vw]'>
-                                {/* <li>
+                                <li>
                                     <a href='/hr-pitch'>HR Pitch</a>
                                 </li>
                                 <li>
                                     <a href='/faq'>FAQs</a>
-                                </li> */}
-                                {/* <li>
+                                </li>
+                                <li>
                                     <a  href='/'>About</a>
-                                </li> */}
+                                </li>
                                 
                             </ul>
-                        </div>
+                        </div> */}
+
                         {/* <div>
                             <button className='bg-[#87acec] text-white px-5 py-2 rounded-full hover:bg-[#a6c1ee]' onClick={()=>navigate('/login')}>Sign In</button>
                         </div> */}
                     </nav>
                 </header>
                 <div className=''>
-                    <div className='flex items-center justify-center'>
-                    <img 
-                        className='object-fill h-40 w-80 m-[2%] p-[2%]'
-                        alt='logo'
-                        src={forese} />
-
+                    
+                    <div className='flex items-center justify-center font - [Inconsolata]'>
+                        <div className='text-3xl font-semibold max-w-2xl  outline-4 text-center h-30  mt-[5%] py-[3%]'>FORESE HR Database</div>
                     </div>
-                    <div className=' mt-[6%]'>
+                    <div className='mt-[6%]'>
                         <div className='flex items-center justify-center'>
-                        <p className='text-xl font-semibold max-w-2xl text-center '>Mock placements is a flagship event organized by FORESE. Each year we have an attendance over 100 HRs and other technical personel from several companies who are invited to examine the technical strength of about 800+ pre final year students.</p>
+                        <p className='text-xl font-semibold max-w-2xl text-center '>Mock Placements is a flagship event organized by FORESE. Each year we have an attendance over 100 HRs and other technical personel from several companies who are invited to examine the technical strength of about 800+ pre final year students.</p>
                         </div>
                         <div className='mt-[3%] flex items-center justify-center'>
                             <button className='bg-[#DBDFEA] text-xl font-semibold content-center px-[4%] py-2 rounded-full hover:bg-[#ACB1D6] hover:text-white hover:z-90 duration-200' onClick={()=>navigate('/login')}>

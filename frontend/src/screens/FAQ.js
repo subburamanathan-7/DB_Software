@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 const forese = require('../assets/forese.png')
 
-
 function FAQ() {
 const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
 
@@ -41,9 +40,6 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                 
                             </ul>
                         </div>
-                        {/* <div>
-                            <button className='bg-[#87acec] text-white px-5 py-2 rounded-full hover:bg-[#a6c1ee]' onClick={()=>navigate('/login')}>Sign In</button>
-                        </div> */}
                     </nav>
             </header>
             <div className="w-full bg-white px-6 pt-10 pb-8 my-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
@@ -57,7 +53,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> Will I be paid for the event?</span>
+                                    <span className='font-semibold'> Will I be paid for the event?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -66,7 +62,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">As students entirely organise this event, we regret that we don't have the means to offer any payment. However, we greatly value your participation. Your support would be invaluable to our students (Sir/Ma'am).
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">As students entirely organise this event, we regret that we don't have the means to offer any payment. However, we greatly value your participation. Your support would be invaluable to our students (Sir/Ma'am).
 
                                 </p>
                             </details>
@@ -74,7 +70,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> Are these Actual placements?</span>
+                                    <span className='font-semibold'> Are these Actual placements?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +79,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">No(Sir/Ma’am), this is only a mock placement where we provide our students with an interview-like experience.
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">(Sir/Ma'am) This event is held on Sundays, not weekdays.
 
                                 </p>
                             </details>
@@ -91,7 +87,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> For whom is this event being held?</span>
+                                    <span className='font-semibold'> For whom is this event being held?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -100,7 +96,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">This event is held for pre-final year students in order to prepare them for upcoming placements.
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">This event is held for pre-final year students in order to prepare them for upcoming placements.
 
                                 </p>
                             </details>
@@ -108,7 +104,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> What benefits does an HR gain from attending mock placements?</span>
+                                    <span className='font-semibold'> What benefits does an HR gain from attending mock placements?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -117,14 +113,14 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">HR professionals can leverage mock placements to assess candidate suitability, provide feedback, evaluate cultural fit, identify talent, also networking amongst Hr’s and contribute to employee development. 
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">HR professionals can leverage mock placements to assess candidate suitability, provide feedback, evaluate cultural fit, identify talent, also networking amongst Hr’s and contribute to employee development. 
                                 </p>
                             </details>
                         </div>
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> What arrangements do you offer?</span>
+                                    <span className='font-semibold'> What arrangements do you offer?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -133,14 +129,14 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">If you choose to attend online, the event will be held in Google Meet with break-out rooms. The arrangements can be tailored according to your preferences (ma'am or sir).If you choose to attend offline, we will arrange for a cab to and from our college, as well as breakfast, lunch, and refreshments (ma'am or sir).
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">If you choose to attend online, the event will be held in Google Meet with break-out rooms. The arrangements can be tailored according to your preferences (ma'am or sir).If you choose to attend offline, we will arrange for a cab to and from our college, as well as breakfast, lunch, and refreshments (ma'am or sir).
                                 </p>
                             </details>
                         </div>
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> When are mocks held?</span>
+                                    <span className='font-semibold'> When are mocks held?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -149,7 +145,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">No(Sir/Ma’am), this is only a mock placement where we provide our students with an interview-like experience.
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">No(Sir/Ma’am), this is only a mock placement where we provide our students with an interview-like experience.
 
                                 </p>
                             </details>
@@ -157,7 +153,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                         <div className="py-5">
                             <details className="group">
                                 <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                    <span> Can the timings be adjusted?</span>
+                                    <span className='font-semibold'> Can the timings be adjusted?</span>
                                     <span className="transition group-open:rotate-180">
                                             <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -166,18 +162,16 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-neutral-600">Yes sure (Sir/Ma'am), the timing can be tailored to meet your requirements.
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">Yes sure (Sir/Ma'am), the timing can be tailored to meet your requirements.
 
                                 </p>
                             </details>
                         </div>
-                    
                     </div>
                 </div>
             </div>
             <div className='bg-[#8EA7E9]'>  <span>.</span> </div>
         </div>
-    
     </>
   )
 }

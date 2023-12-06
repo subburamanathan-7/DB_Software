@@ -8,7 +8,6 @@ import { Menu, Transition } from '@headlessui/react'
 import FileUploadForm from './FileUploadForm'
 import {currentUserContext} from '../App'
 const forese = require('../assets/forese.png')
-// const forese = require('../forese_logo.png')
 
 
 function DashNavbar() {
@@ -52,14 +51,6 @@ function DashNavbar() {
                     src={forese} />
                 </div>
                 <div className='flex justify-end '>
-                    {/* <div className='ml-2 mr-2'>
-                        <button className='bg-[#DBDFEA] text-[#000000] px-14 py-2 rounded-full hover:scale-95 duration-150' onClick={()=>navigate('/faq')}>FAQs  
-                        </button>
-                    </div>
-                    <div className='mr-2 ml-2'>
-                        <button className='bg-[#DBDFEA] text-[#000000] px-12 py-2 rounded-full hover:scale-95 duration-150'onClick={()=>navigate('/hr-pitch')} >HR Pitch  
-                        </button>
-                    </div> */}
                     {
                         currentUserRole==='Director'?
                         (
@@ -81,28 +72,6 @@ function DashNavbar() {
                         }}>Upload Contacts 
                     </button>
                     
-
-                    {/* <div className=' ml-2 '>
-                        <button className='bg-[#DBDFEA] text-[#000000]  px-5 py-2 rounded-full hover:scale-95 duration-150' onClick={handleLogout}>Logout</button>
-                    </div> */}
-                    {/* {
-                        currentUserRole==='Member'?(
-                            <div className='mr-2 ml-2'>
-                                <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full flex  items-center justify-between'>
-                                    <i className=" fa-solid fa-people-group px-2"></i>
-                                    Hello {user}
-                                </button>
-                            </div>
-                    
-                        ):(
-                            <div className='mr-2 ml-2'>
-                                <button className='bg-[#DBDFEA] text-[#000000] px-5 py-2 rounded-full flex  items-center justify-between'>
-                                    <i className="fa-solid fa-user-tie px-2"></i>
-                                    Hello {user}
-                                </button>
-                            </div>
-                        )
-                    } */}
                     <Menu as="div" className="relative inline-block text-left">
                           <div>
                             <Menu.Button className="">

@@ -115,7 +115,7 @@ function GlobalHR() {
         filteredData=filteredData.reverse()
         content= filteredData.map((contact)=>{
             return(
-                <tr className={`text-[#000000] text-lg rounded-md ${contact.status==='blacklisted'?'bg-[#E97777] hover:border-[#DBDFEA] hover:border-x-4 duration-150':'bg-[] hover:border-[#8294C4] hover:border-x-4 duration-150'}`}>
+                <tr className={`text-[#000000] text-lg rounded-md ${contact.status==='blacklisted'?'bg-[#fc6262] hover:border-[#000000] hover:border-x-4 duration-150':'bg-[] hover:border-[#8294C4] hover:border-x-4 duration-150'}`}>
                 
                     <td className='p-3 font-base tracking-wide text-left whitespace-nowrap '>{contact.name}</td>
                     <td className='p-3 font-base tracking-wide text-left whitespace-nowrap '>{contact.company}</td>
@@ -133,9 +133,9 @@ function GlobalHR() {
             
             <div className={`p-5  bg-opacity-60 min-h-screen`}>
             
-               {/* Cards */}
-               <div>
-                        <h1 className='font-bold text-4xl text-center text-[#8294C4] my-[2%]'>Status of Contacts</h1>
+                {/* Cards */}
+                <div>
+                        <h1 className='font-bold text-4xl text-center text-[#8294C4] my-[2%] cursor-default'>Status of Contacts</h1>
                         <div className='flex flex-wrap justify-center text-white'>
                             <Card name='Total' color='#7286D3' count={totalContacts} onClick={()=>{ 
                                 setShowFilter(false);
@@ -187,51 +187,51 @@ function GlobalHR() {
                             }} />
                             
                         </div>
-                    </div>
+                </div>
                     
-                    {/* Search Bar */}
-                    <div className='flex justify-center my-[2%] '>
-                        {/* <button className='bg-color2 bg-opacity-90 text-white hover:scale-95 hover:bg-white hover:bg-opacity-10 focus:outine-none font-medium text-sm rounded-2xl px-5 py-2.5 text-center mr-5'
-                        onClick={()=>setShowModal(true)}>
-                            Add Contact
-                        </button> */}
-                        <form className=' ml-5 w-[90%] relative rounded-full overflow-hidden border-2 border-white'>
-                            <div className=' px-[3%] py-[0.5%] flex items-center justify-center bg-[#7286D3] bg-opacity-75'>
-                                <i class="fa-solid fa-magnifying-glass fa-beat px-2 ml-2 text-xl"></i>
-                                <input type='search' placeholder='Type Here...' className='bg-color2 bg-opacity-5 placeholder-[#000000] w-full px-4 rounded-full appearance-none focus:outline-none border-none '
-                                onChange={handleSearchChange} value={searchParam} />
-                                <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md  p-1 rounded-full bg-color2 bg-opacity-5'>
-                                <input
-                                type='checkbox'
-                                className='sr-only'
-                                checked={isChecked}
-                                onChange={handleCheckboxChange}
-                                />
-                                <span
-                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                                    !isChecked ? ' rounded-md bg-white bg-opacity-60' : 'bg-[#]'
-                                }`}
-                                // False- BY Name
-                                >
-                                Name
-                                </span>
-                                <span
-                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                                    isChecked ? 'rounded-md bg-white bg-opacity-60' : 'bg-[#]'
-                                }`}
-                                // True- BY Number
+                {/* Search Bar */}
+                <div className='flex justify-center my-[2%] '>
+                    {/* <button className='bg-color2 bg-opacity-90 text-white hover:scale-95 hover:bg-white hover:bg-opacity-10 focus:outine-none font-medium text-sm rounded-2xl px-5 py-2.5 text-center mr-5'
+                    onClick={()=>setShowModal(true)}>
+                        Add Contact
+                    </button> */}
+                    <form className=' ml-5 w-[90%] relative rounded-full overflow-hidden border-2 border-white'>
+                        <div className=' px-[3%] py-[0.5%] flex items-center justify-center bg-[#7286D3] bg-opacity-75'>
+                            <i class="fa-solid fa-magnifying-glass fa-beat px-2 ml-2 text-xl"></i>
+                            <input type='search' placeholder='Type Here...' className='bg-color2 bg-opacity-5 placeholder-[#000000] w-full px-4 rounded-full appearance-none focus:outline-none border-none '
+                            onChange={handleSearchChange} value={searchParam} />
+                            <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md  p-1 rounded-full bg-color2 bg-opacity-5'>
+                            <input
+                            type='checkbox'
+                            className='sr-only'
+                            checked={isChecked}
+                            onChange={handleCheckboxChange}
+                            />
+                            <span
+                            className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                                !isChecked ? ' rounded-md bg-white bg-opacity-60' : 'bg-[#]'
+                            }`}
+                            // False- BY Name
+                            >
+                            Name
+                            </span>
+                            <span
+                            className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                                isChecked ? 'rounded-md bg-white bg-opacity-60' : 'bg-[#]'
+                            }`}
+                            // True- BY Number
 
-                                >
-                                Number
-                                </span>
-                                </label>
-                            </div>
-                        </form>
-                    </div>
+                            >
+                            Number
+                            </span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
                   
                 {/* Table */}
                 <h1 className='text-3xl font-bold mb-2 mt-10 text-[#8294C4]'>Your Contacts</h1>
-                    <div className='overflow-auto rounded-lg shadow'>
+                <div className='overflow-auto rounded-lg shadow'>
                         <table className='cursor-default w-full'>
                             <thead className='bg-[#8EA7E9]'>
                                 <tr className='text-white text-lg font-semibold'>

@@ -46,8 +46,8 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                 </header>
                 <div className='bg-white w-[80%] px-6 py-10 pb-8 my-[5%] shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg sm:px-10'>
 
-                    <div className=' mx-[2%] text-lg '>
-                    Call the HR ( office hours ),<br/>
+                    <div className=' mx-[2%] mt-[2%] text-lg  '>
+                    <div className=' font-semibold'>Call the HR ( office hours )</div><br/>
                     Good Morning/Good Afternoon Sir/Ma'am. Am I speaking to (Mr./Ms) (HR Name) from (Company Name)?
                     </div>
                     <div class="mx-[2%] max-w-full mt-[2%]">
@@ -67,7 +67,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">This is  (Your Name) and I am calling on behalf of Prof MR S Muraleedharan sir, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?</div>
+                            <div class="pb-4 text-lg">This is  (Your Name) and I am calling on behalf of Mr. S Muraleedharan sir, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?</div>
                         </details>
                         <details class="group">
                             <summary
@@ -84,7 +84,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">
+                            <div class="pb-4 text-lg">
                                 Sir/ Ma'am, we are organising an event called the MOCK PLACEMENTS. This event is held exclusively for the pre-final year students of our college and assists them in preparing for the actual placements that will be held for them next year. 
                                 The event aims to help students understand the requirements of the industry, by making them experience a one-on-one interview-like environment.<br/><br/>
 
@@ -97,7 +97,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
 
 
                                 Do you have any queries for me, (Sir/Ma'am)?
-                                <b><a href='/faq'>Refer FAQS</a></b><br/><br/>
+                                <b><a href='/faq'>(Refer FAQS)</a></b><br/><br/>
 
                                 Could I please have your E-Mail ID so I can send you a formal invite?
                                 (Note down the mail ID)<br/><br/>
@@ -121,7 +121,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">I am so sorry to disturb you, (Sir/Ma'am). What time is suitable to call you back?(<b>Note down the time</b>) Thank you, (Sir/ Ma'am).(End Call)</div> 
+                            <div class="pb-4 text-lg">I am so sorry to disturb you, (Sir/Ma'am). What time is suitable to call you back?(<b>Note down the time</b>) Thank you, (Sir/ Ma'am).(End Call)</div> 
                         </details>
                        
                         <details class="group" open>
@@ -139,7 +139,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">Sorry, can you please tell me in which company your currently working at ?(<b>Note it down</b>).</div>
+                            <div class="pb-4 text-lg">Sorry, can you please tell me in which company your currently working at ?(<b>Note it down</b>).</div>
                         </details>
                         <details class="group">
                             <summary
@@ -156,7 +156,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                     </svg>
                                 </div>
                             </summary>
-                            <div class="pb-4 text-secondary-500">Sorry for disturbing,  thank you </div>
+                            <div class="pb-4 text-lg">Sorry for disturbing,  thank you </div>
                         </details>
                        
                        

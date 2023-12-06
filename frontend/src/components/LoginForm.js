@@ -6,6 +6,8 @@ import {toast} from 'react-toastify'
 import {login} from "../features/users/UserServices"
 import {currentUserContext} from '../App'
 
+const forese = require('../assets/forese.png')
+
 function Form() {
     const [formData, setFormData] = useState({email:"", password:"", role:""})
     const {currentUser,setCurrentUser } = useContext(currentUserContext);
@@ -89,7 +91,14 @@ function Form() {
     }
     return (
         <>
-            <div className='flex justify-center items-center h-screen bg-[#8EA7E9]'>
+            <div className='flex flex-col justify-center items-center h-screen bg-[#8EA7E9]'>
+                <div className='flex items-center justify-center mt-[-3%] py-[3%]'>
+                    <img 
+                        className='object-fill w-40'
+                        alt='logo'
+                        src={forese} />
+
+                </div>
                 <form className='w-96 p-6 shadow-lg bg-white rounded-md text-[#7286D3]'>
                     <h2 className='text-3xl block text-center font-semibold '><i className=' text-2xl fa-solid fa-user px-2'></i>Login</h2>
                     <hr className='mt-3'/>
@@ -140,6 +149,3 @@ function Form() {
 }
 
 export default Form
-
-
-// disabled={!formData.email || !formData.password || !formData.role}
