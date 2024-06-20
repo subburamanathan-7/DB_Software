@@ -103,7 +103,7 @@ function Form() {
                     <h2 className='text-3xl block text-center font-semibold '><i className=' text-2xl fa-solid fa-user px-2'></i>Login</h2>
                     <hr className='mt-3'/>
                     <div className='mt-3'>
-                        <label htmlFor='email' className='  block font-semibold mb-2 text-base'>Email</label>
+                        <label htmlFor='email' className=' block font-semibold mb-2 text-base'>Email</label>
                         <input type='email' id ='email' 
                         name ="email"
                         className='border border-[#7286D3] w-full text-base px-2 py-1 focus:outline-none focus:ring-0' 

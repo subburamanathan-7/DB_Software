@@ -117,8 +117,6 @@ const FileUploadForm = () => {
 				<button onClick={handleUpload} className='bg-[#8EA7E9] hover:scale-95 focus:outine-none font-medium text-sm rounded-lg px-5 py-2.5 text-center w-full mx-2' id='submit' >
 					Submit
 				</button>
-				
-
 			</div> 
 		</div>
     </>

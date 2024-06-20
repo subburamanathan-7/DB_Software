@@ -136,7 +136,9 @@ const updateContact = asyncHandler(async(req,res)=>{
         res.status(400)
         throw new Error('Contact not listed')
     }
+
     const number = req.body.contactNumber;
+    
     const ContactExists = await Contacts.findOne({$and:[
         {contactNumber:{$eq:number}},
         {_id:{$ne:req.params.id}}

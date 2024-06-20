@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-const forese = require('../assets/forese.png')
 
 function FAQ() {
+const forese = require('../assets/forese.png')
+
 const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
 
   return (
@@ -79,8 +80,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-lg">(Sir/Ma'am) This event is held on Sundays, not weekdays.
-
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">No(Sir/Ma’am), this is only a mock placement where we provide our students with an interview-like experience.
                                 </p>
                             </details>
                         </div>
@@ -145,9 +145,8 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                                             </svg>
                                         </span>
                                 </summary>
-                                <p className="group-open:animate-fadeIn mt-3 text-lg">No(Sir/Ma’am), this is only a mock placement where we provide our students with an interview-like experience.
-
-                                </p>
+                               
+                                <p className="group-open:animate-fadeIn mt-3 text-lg">(Sir/Ma'am) This event is held on Sundays, not weekdays.</p>
                             </details>
                         </div>
                         <div className="py-5">

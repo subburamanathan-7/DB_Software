@@ -12,7 +12,7 @@ export const login = async(userData)=>{
                 throw new Error(error.response.data.message) 
                 // console.log(error.response.status);
                 // console.log(error.response.headers);
-            } 
+            }  
             else if (error.request) {
                 // console.log(error.request);
             } 

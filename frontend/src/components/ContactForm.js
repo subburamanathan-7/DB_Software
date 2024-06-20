@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import validator from 'validator'
 import {addContact} from '../features/contacts/ContactServices'
-
+ 
 function ContactForm(currentUserID,onClose) {
     const queryClient = useQueryClient()
    
@@ -171,9 +171,12 @@ function ContactForm(currentUserID,onClose) {
                                 <option value="calledAccepted">Called/Accepted</option>
                                 <option value="calledDeclined">Called/Declined</option>
                                 <option value="calledNotReachable">Called/NotReachable</option>
+                                <option value="calledPostponed">Called/Postponed</option>
                                 <option value="emailedAccepted">Emailed/Accepted</option>
                                 <option value="emailedAwaitingResponse">Emailed/AwaitingResponse</option>
                                 <option value="emailedDeclined">Emailed/Declined</option>
+                                <option value="wrongNumber">Wrong Number</option>
+
                             </select>
                             <select name="interviewMode" id="interviewMode" className='border py-1 px-2 border-[#A9A9A9] rounded'
                             value={formData.interviewMode} onChange={handleChange}

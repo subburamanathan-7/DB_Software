@@ -33,6 +33,7 @@ function GlobalHR() {
         'emailedAwaitingResponse':'Emailed/Awaiting Response',
         'emailedDeclined':'Emailed/Declined',
         'blacklisted':'Blacklisted',
+        'wrongNumber':'Wrong Number'
     }
     const [usersMap, setUsersMap]=useState({})
     const [showFilter,setShowFilter] = useState(false)
@@ -49,7 +50,8 @@ function GlobalHR() {
         emailedAccepted:0,
         emailedAwaitingResponse:0,
         emailedDeclined:0,
-        blacklisted:0
+        blacklisted:0,
+        wrongNumber:0,
     })
     
     const handleCheckboxChange = () => {
@@ -113,6 +115,38 @@ function GlobalHR() {
                 item.status===filterParam)
         }
         filteredData=filteredData.reverse()
+        
+        // filteredData.sort(function(a, b) {
+        //     let keyA = new String(usersMap[a.incharge]),
+        //         keyB = new String(usersMap[b.incharge]),
+        //         keyC = new String(usersMap[a.volunteer]),
+        //         keyD = new String(usersMap[b.volunteer]);
+        //     // Compare the 2 keys
+        //     if (keyA == keyB) {
+        //         return (keyC < keyD) ? -1 : (keyC > keyD) ? 1 : 0;
+        //     } else {
+        //         return (keyA < keyB) ? -1 : 1;
+        //     }
+        // });
+        filteredData.sort(function(a, b) {
+            let keyA = new String(usersMap[a.incharge]),
+                keyB = new String(usersMap[b.incharge]);
+            // Compare the 2 keys
+            if (keyA < keyB) return -1;
+            else if (keyA > keyB) return 1;
+            else{
+                let keyC = new String(usersMap[a.volunteer]),
+                keyD = new String(usersMap[b.volunteer]);
+                console.log(keyC,keyD)
+                if(keyC>keyD)
+                    return -1;
+                else if(keyC<keyD)
+                    return 1;
+                else
+                    return 0;
+            }
+        });
+
         content= filteredData.map((contact)=>{
             return(
                 <tr className={`text-[#000000] text-lg rounded-md ${contact.status==='blacklisted'?'bg-[#fc6262] hover:border-[#000000] hover:border-x-4 duration-150':'bg-[] hover:border-[#8294C4] hover:border-x-4 duration-150'}`}>
@@ -185,6 +219,11 @@ function GlobalHR() {
                                 setShowFilter(true);
                                 setFilterParam('blacklisted')
                             }} />
+
+                            <Card name='Wrong Number' color='#7286D3' count={statusResponseData['wrongNumber']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('wrongNumber')
+                            }} />
                             
                         </div>
                 </div>
@@ -240,7 +279,7 @@ function GlobalHR() {
                                     <th className='p-3 tracking-wide text-left'>MOBILE</th>
                                     <th className='p-3 tracking-wide text-left'>STATUS</th>
                                     <th className='p-3 tracking-wide text-left'>POC</th>
-                                    <th className='p-3 tracking-wide text-left'>ACTIONS</th>
+                                    <th className='p-3 tracking-wide text-left'>INCHARGE</th>
                                 </tr>
                         </thead>
                         <tbody className='divide-y divide'>

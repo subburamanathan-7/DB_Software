@@ -38,7 +38,7 @@ function DashNavbar() {
         navigate('/login')
     }
     let user = sessionStorage.getItem('email')
-    user = user?user.substring(0,user.length-10):''
+    user = user?user.substring(0,user.length-13):''
     user = user?user.charAt(0).toUpperCase() + user.slice(1):''
     
   return (

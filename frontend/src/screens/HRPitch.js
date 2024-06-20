@@ -69,6 +69,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                             </summary>
                             <div class="pb-4 text-lg">This is  (Your Name) and I am calling on behalf of Mr. S Muraleedharan sir, Chief Placement Officer of Sri Venkateswara College of Engineering, Sriperumbudur. Could I please borrow 5 minutes of your time?</div>
                         </details>
+
                         <details class="group">
                             <summary
                                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
@@ -124,7 +125,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                             <div class="pb-4 text-lg">I am so sorry to disturb you, (Sir/Ma'am). What time is suitable to call you back?(<b>Note down the time</b>) Thank you, (Sir/ Ma'am).(End Call)</div> 
                         </details>
                        
-                        <details class="group" open>
+                        <details class="group">
                             <summary
                                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
                                 <span className='font-semibold'>If wrong company </span>
@@ -141,6 +142,7 @@ const [currentUser,setCurrentUser]=useState(sessionStorage.getItem('role'))
                             </summary>
                             <div class="pb-4 text-lg">Sorry, can you please tell me in which company your currently working at ?(<b>Note it down</b>).</div>
                         </details>
+                      
                         <details class="group">
                             <summary
                                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">

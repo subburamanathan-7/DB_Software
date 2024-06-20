@@ -37,6 +37,7 @@ function MainDashboard() {
         'emailedAwaitingResponse':'Emailed/Awaiting Response',
         'emailedDeclined':'Emailed/Declined',
         'blacklisted':'Blacklisted',
+        'wrongNumber':'Wrong Number'
     }
     
     const queryClient = useQueryClient()
@@ -61,7 +62,8 @@ function MainDashboard() {
         emailedAccepted:0,
         emailedAwaitingResponse:0,
         emailedDeclined:0,
-        blacklisted:0
+        blacklisted:0,
+        wrongNumber:0
     })
     
     const handleCheckboxChange = () => {
@@ -79,7 +81,8 @@ function MainDashboard() {
         // Object.keys(responseData).forEach(v => responseData[v] = 0)
         return listContacts(sessionStorage.getItem('user'))
         },
-    })     
+    }) 
+
     // const show404 = ()=>{
     //     setShowSearchNotFound(true)
     // }
@@ -87,6 +90,7 @@ function MainDashboard() {
     //     show404()
     //     setSearchParam(' ')      
     // })
+    
     if(listContactMutation.isLoading){
         // <Spinner/>
     }
@@ -113,7 +117,7 @@ function MainDashboard() {
         }
         filteredData.reverse()
 
-        content= filteredData.map((contact)=>{
+        content = filteredData.map((contact)=>{
             
             return(
                 <tr className={`text-[#000000] text-lg rounded-md ${contact.status==='blacklisted'?'bg-[#fc6262] hover:border-[#000000] hover:border-x-4 duration-150':'bg-[] hover:border-[#8294C4] hover:border-x-4 duration-150'}`}>
@@ -194,6 +198,11 @@ function MainDashboard() {
                                 <Card name='Blacklisted' color='#7286D3' count={statusResponseData['blacklisted']} onClick={()=>{ 
                                     setShowFilter(true);
                                     setFilterParam('blacklisted')
+                                }} />
+
+                                <Card name='Wrong Number' color='#7286D3' count={statusResponseData['wrongNumber']} onClick={()=>{ 
+                                    setShowFilter(true);
+                                    setFilterParam('wrongNumber')
                                 }} />
                                 
                             </div>

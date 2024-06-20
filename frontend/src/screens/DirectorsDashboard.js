@@ -37,6 +37,8 @@ function DirectorsDashboard() {
         'emailedAwaitingResponse':'Emailed/Awaiting Response',
         'emailedDeclined':'Emailed/Declined',
         'blacklisted':'Blacklisted',
+        'wrongNumber':'Wrong Number'
+
     }
     const [usersMap, setUsersMap]=useState({})
     const queryClient = useQueryClient()
@@ -60,7 +62,8 @@ function DirectorsDashboard() {
         emailedAccepted:0,
         emailedAwaitingResponse:0,
         emailedDeclined:0,
-        blacklisted:0
+        blacklisted:0,
+        wrongNumber:0
     })
     
     const handleCheckboxChange = () => {
@@ -128,9 +131,10 @@ function DirectorsDashboard() {
         
      
         filteredData=filteredData.reverse()
+        
         filteredData.sort(function(a, b) {
-            let keyA = new String(a.volunteer),
-                keyB = new String(b.volunteer);
+            let keyA = new String(usersMap[a.volunteer]),
+                keyB = new String(usersMap[b.volunteer]);
             // Compare the 2 keys
             if (keyA > keyB) return -1;
             if (keyA < keyB) return 1;
@@ -164,157 +168,162 @@ function DirectorsDashboard() {
     return (
         <>
             <DashNavbar/>
-                <Fragment>
-                    <div className={`p-5 bg-opacity-60 min-h-screen`}>
-                        
-                        {/* Cards */}
-                        <div>
-                            <h1 className='font-bold text-4xl  text-center text-[#8294C4] my-[2%] cursor-default'>Status of Contacts</h1>
-                            <div className='flex flex-wrap justify-center text-white'>
-                                <Card name='Total' color='#7286D3' count={totalContacts} onClick={()=>{ 
-                                    setShowFilter(false);
-                                    setFilterParam('')
-                                }} />
+            <Fragment>
+                <div className={`p-5 bg-opacity-60 min-h-screen`}>
+                    
+                    {/* Cards */}
+                    <div>
+                        <h1 className='font-bold text-4xl  text-center text-[#8294C4] my-[2%] cursor-default'>Status of Contacts</h1>
+                        <div className='flex flex-wrap justify-center text-white'>
+                            <Card name='Total' color='#7286D3' count={totalContacts} onClick={()=>{ 
+                                setShowFilter(false);
+                                setFilterParam('')
+                            }} />
 
-                                <Card name='Called/Accepted' color='#7286D3' count={statusResponseData['calledAccepted']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('calledAccepted')
-                                }} />
-                                
-                                <Card name='Called/Postponed' color='#7286D3' count={statusResponseData['calledPostponed']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('calledPostponed')
-                                }} />
-
-                                <Card name='Called/Declined' color='#7286D3' count={statusResponseData['calledDeclined']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('calledDeclined')
-                                }} />
-                                
-                                <Card name='Called/NotReachable' color='#7286D3' count={statusResponseData['calledNotReachable']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('calledNotReachable')
-                                }} />
-
-                                <Card name='Not Called' color='#7286D3' count={statusResponseData['notCalled']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('notCalled')
-                                }}/>
-
-                                <Card name='Emailed/Accepted' color='#7286D3' count={statusResponseData['emailedAccepted']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('emailedAccepted')
-                                }} />
-                                
-                                <Card name='Emailed/AwaitingResponse' color='#7286D3' count={statusResponseData['emailedAwaitingResponse']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('emailedAwaitingResponse')
-                                }} />
-                                <Card name='Emailed/Declined' color='#7286D3' count={statusResponseData['emailedDeclined']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('emailedDeclined')
-                                }} />
-                                
-                                <Card name='Blacklisted' color='#7286D3' count={statusResponseData['blacklisted']} onClick={()=>{ 
-                                    setShowFilter(true);
-                                    setFilterParam('blacklisted')
-                                }} />
-                                
-                            </div>
-                        </div>
-                        
-                        {/* Search Bar */}
-                        <div className='flex justify-center my-[2%] '>
-                            {/* <button className='bg-color2 bg-opacity-90 text-white hover:scale-95 hover:bg-white hover:bg-opacity-10 focus:outine-none font-medium text-sm rounded-2xl px-5 py-2.5 text-center mr-5'
-                            onClick={()=>setShowModal(true)}>
-                                Add Contact
-                            </button> */}
-                            <form className=' ml-5 w-[90%] relative rounded-full overflow-hidden border-2 border-white'>
-                                <div className=' px-[3%] py-[0.5%] flex items-center justify-center bg-[#7286D3] bg-opacity-75'>
-                                    <i class="fa-solid fa-magnifying-glass fa-beat px-2 ml-2 text-xl"></i>
-                                    <input type='search' placeholder='Type Here...' className='bg-color2 bg-opacity-5 placeholder-[#000000] w-full px-4 rounded-full appearance-none focus:outline-none border-none '
-                                    onChange={handleSearchChange} value={searchParam} />
-                                    <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md  p-1 rounded-full bg-color2 bg-opacity-5'>
-                                    <input
-                                    type='checkbox'
-                                    className='sr-only'
-                                    checked={isChecked}
-                                    onChange={handleCheckboxChange}
-                                    />
-                                    <span
-                                    className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                                        !isChecked ? ' rounded-md bg-white bg-opacity-60' : 'bg-[#]'
-                                    }`}
-                                    // False- BY Name
-                                    >
-                                    Name
-                                    </span>
-                                    <span
-                                    className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                                        isChecked ? 'rounded-md bg-white bg-opacity-60' : 'bg-[#]'
-                                    }`}
-                                    // True- BY Number
-
-                                    >
-                                    Number
-                                    </span>
-                                    </label>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        {/* Table */}
-                        <div className='flex justify-between justify-items-center  justify-self-center items-baseline mx-[1%] my-[2%]'>
-                            <h1 className='text-3xl font-bold text-[#8294C4] cursor-default'>Your Contacts</h1>
-                            <button onClick={()=>setShowModal(true)} title="Add Contact"
-                                className=" z-90 bg-[#8294C4] px-[2%] py-[1%] rounded-md drop-shadow-lg text-white text-thin hover:bg-white hover:text-[#000000] duration-150 cursor-pointer">+
-
-                            </button>
-                        </div>
-                      
-                        <div className='overflow-auto rounded-lg shadow'>
-                            <table className='w-full cursor-default'>
-                                <thead className='bg-[#8EA7E9]'>
-                                    <tr className='text-white text-lg font-semibold'>
-                                        <th className='p-3 tracking-wide text-left'>NAME</th>
-                                        <th className='p-3 tracking-wide text-left'>COMPANY</th>
-                                        <th className='p-3 tracking-wide text-left'>MOBILE</th>
-                                        <th className='p-3 tracking-wide text-left'>STATUS</th>
-                                        <th className='p-3 tracking-wide text-left'>POC</th>
-                                        <th className='p-3 tracking-wide text-left'>ACTIONS</th>
-                                    </tr>
-                                </thead>
+                            <Card name='Called/Accepted' color='#7286D3' count={statusResponseData['calledAccepted']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('calledAccepted')
+                            }} />
                             
-                                <tbody className='divide-y divide'>
-                                    {/* <tr className='rounded'>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>Shreya</td>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>SVCE</td>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>7418732846</td>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '><span className='p-1.5 text-xs font-medium tracking-wide bg-[#A9A9A9] rounded-lg bg-opacity-30'>Not Reachable</span></td>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>Ramanathan</td>
-                                        <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '><i className="fa-solid fa-pen-to-square mr-4 hover:text-[#D22B2B]"></i><i className="fa-sharp fa-solid fa-trash hover:text-[#D22B2B]"></i></td>
-                                    </tr> */}
-                                    {content}
-                                </tbody>
-                            </table>
+                            <Card name='Called/Postponed' color='#7286D3' count={statusResponseData['calledPostponed']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('calledPostponed')
+                            }} />
+
+                            <Card name='Called/Declined' color='#7286D3' count={statusResponseData['calledDeclined']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('calledDeclined')
+                            }} />
+                            
+                            <Card name='Called/NotReachable' color='#7286D3' count={statusResponseData['calledNotReachable']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('calledNotReachable')
+                            }} />
+
+                            <Card name='Not Called' color='#7286D3' count={statusResponseData['notCalled']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('notCalled')
+                            }}/>
+
+                            <Card name='Emailed/Accepted' color='#7286D3' count={statusResponseData['emailedAccepted']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('emailedAccepted')
+                            }} />
+                            
+                            <Card name='Emailed/AwaitingResponse' color='#7286D3' count={statusResponseData['emailedAwaitingResponse']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('emailedAwaitingResponse')
+                            }} />
+                            <Card name='Emailed/Declined' color='#7286D3' count={statusResponseData['emailedDeclined']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('emailedDeclined')
+                            }} />
+                            
+                            <Card name='Blacklisted' color='#7286D3' count={statusResponseData['blacklisted']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('blacklisted')
+                            }} />
+
+                            <Card name='Wrong Number' color='#7286D3' count={statusResponseData['wrongNumber']} onClick={()=>{ 
+                                setShowFilter(true);
+                                setFilterParam('wrongNumber')
+                            }} />
+                            
                         </div>
                     </div>
+                    
+                    {/* Search Bar */}
+                    <div className='flex justify-center my-[2%] '>
+                        {/* <button className='bg-color2 bg-opacity-90 text-white hover:scale-95 hover:bg-white hover:bg-opacity-10 focus:outine-none font-medium text-sm rounded-2xl px-5 py-2.5 text-center mr-5'
+                        onClick={()=>setShowModal(true)}>
+                            Add Contact
+                        </button> */}
+                        <form className=' ml-5 w-[90%] relative rounded-full overflow-hidden border-2 border-white'>
+                            <div className=' px-[3%] py-[0.5%] flex items-center justify-center bg-[#7286D3] bg-opacity-75'>
+                                <i class="fa-solid fa-magnifying-glass fa-beat px-2 ml-2 text-xl"></i>
+                                <input type='search' placeholder='Type Here...' className='bg-color2 bg-opacity-5 placeholder-[#000000] w-full px-4 rounded-full appearance-none focus:outline-none border-none '
+                                onChange={handleSearchChange} value={searchParam} />
+                                <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md  p-1 rounded-full bg-color2 bg-opacity-5'>
+                                <input
+                                type='checkbox'
+                                className='sr-only'
+                                checked={isChecked}
+                                onChange={handleCheckboxChange}
+                                />
+                                <span
+                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                                    !isChecked ? ' rounded-md bg-white bg-opacity-60' : 'bg-[#]'
+                                }`}
+                                // False- BY Name
+                                >
+                                Name
+                                </span>
+                                <span
+                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                                    isChecked ? 'rounded-md bg-white bg-opacity-60' : 'bg-[#]'
+                                }`}
+                                // True- BY Number
 
-                    {/* FAB */}
-                    <button onClick={()=>setShowModal(true)} title="Add Contact"
-                    className="fixed z-90 bg-[#000000] px-[2%] py-[1%] rounded-md drop-shadow-lg flex justify-center items-center text-white text-thin hover:bg-[#DBDFEA] hover:drop-shadow-2xl">+</button>
-        
-                    {/* Modal  */}
-                    <Modal isVisible={showModal} onClose={()=>{setShowModal(false)}}>
-                        <ContactForm currentUserID = {currentUserID} onClose={()=>{setShowModal(false)}}/>
-                    </Modal>
-                    <Modal isVisible={showUpdateModal} onClose={()=>{setShowUpdateModal(false)}}>
-                        <UpdateContactForm currentUserID = {currentUserID} onClose={()=>{setShowUpdateModal(false)}}/>
-                    </Modal>
-                    <Modal isVisible={showDeleteModal} onClose={()=>{setShowDeleteModal(false)}}>
-                        <DeleteContactForm currentUserID = {currentUserID} onClose={()=>{setShowDeleteModal(false)}}/>
-                    </Modal>
-                </Fragment>
+                                >
+                                Number
+                                </span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    {/* Table */}
+                    <div className='flex justify-between justify-items-center  justify-self-center items-baseline mx-[1%] my-[2%]'>
+                        <h1 className='text-3xl font-bold text-[#8294C4] cursor-default'>Your Contacts</h1>
+                        <button onClick={()=>setShowModal(true)} title="Add Contact"
+                            className=" z-90 bg-[#8294C4] px-[2%] py-[1%] rounded-md drop-shadow-lg text-white text-thin hover:bg-white hover:text-[#000000] duration-150 cursor-pointer">+
+
+                        </button>
+                    </div>
+                    
+                    <div className='overflow-auto rounded-lg shadow'>
+                        <table className='w-full cursor-default'>
+                            <thead className='bg-[#8EA7E9]'>
+                                <tr className='text-white text-lg font-semibold'>
+                                    <th className='p-3 tracking-wide text-left'>NAME</th>
+                                    <th className='p-3 tracking-wide text-left'>COMPANY</th>
+                                    <th className='p-3 tracking-wide text-left'>MOBILE</th>
+                                    <th className='p-3 tracking-wide text-left'>STATUS</th>
+                                    <th className='p-3 tracking-wide text-left'>POC</th>
+                                    <th className='p-3 tracking-wide text-left'>ACTIONS</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody className='divide-y divide'>
+                                {/* <tr className='rounded'>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>Shreya</td>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>SVCE</td>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>7418732846</td>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '><span className='p-1.5 text-xs font-medium tracking-wide bg-[#A9A9A9] rounded-lg bg-opacity-30'>Not Reachable</span></td>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '>Ramanathan</td>
+                                    <td className='p-3 text-sm tracking-wide text-left whitespace-nowrap '><i className="fa-solid fa-pen-to-square mr-4 hover:text-[#D22B2B]"></i><i className="fa-sharp fa-solid fa-trash hover:text-[#D22B2B]"></i></td>
+                                </tr> */}
+                                {content}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {/* FAB */}
+                {/* <button onClick={()=>setShowModal(true)} title="Add Contact"
+                className="fixed z-90 bg-[#000000] px-[2%] py-[1%] rounded-md drop-shadow-lg flex justify-center items-center text-white text-thin hover:bg-[#DBDFEA] hover:drop-shadow-2xl">+</button>
+        */}
+                {/* Modal  */}
+                <Modal isVisible={showModal} onClose={()=>{setShowModal(false)}}>
+                    <ContactForm currentUserID = {currentUserID} onClose={()=>{setShowModal(false)}}/>
+                </Modal>
+                <Modal isVisible={showUpdateModal} onClose={()=>{setShowUpdateModal(false)}}>
+                    <UpdateContactForm currentUserID = {currentUserID} onClose={()=>{setShowUpdateModal(false)}}/>
+                </Modal>
+                <Modal isVisible={showDeleteModal} onClose={()=>{setShowDeleteModal(false)}}>
+                    <DeleteContactForm currentUserID = {currentUserID} onClose={()=>{setShowDeleteModal(false)}}/>
+                </Modal>
+            </Fragment>
         </>
     )
 }
